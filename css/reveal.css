@@ -1188,6 +1188,10 @@ body {
  .cgreen{color:#11C332 !important;}
  .cblue{color:#42AFFA !important;}
  .cwhite{color:#FFF !important;}
+
+ .text-normal {
+   text-transform: none !important;
+ }
  
  .left-align{text-align:left;}
  .fullw{width:100%;}
