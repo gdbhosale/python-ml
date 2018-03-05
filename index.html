@@ -88,7 +88,366 @@
 					<a class="cred">Arthur Samuel</a>, an American pioneer in the field of computer gaming and artificial intelligence, coined the term "Machine Learning" in 1959 while at IBM.
 				</p>
 			</section>
-			
+
+			<section>
+				<h2>Machine learning</h2>
+				<p>
+					It sits at the intersection of <a class="cred">statistics</a> and <a class="cred">computer science</a>, yet it can wear many different masks. You may also hear it labeled several other names or buzz words
+				</p>
+				<p>
+					Data Science, Big Data, Artificial Intelligence, Predictive Analytics, Computational Statistics, Data Mining
+				</p>
+			</section>
+
+			<section>
+				<h2>Machine learning examples</h2>
+				<ul class="left-align" style="font-size:33px;">
+					<li>
+						<a class="cred">Supervised Learning</a> - Your email provider kindly places that sketchy email from the "Nigerian prince with $50,000 to deposit into an overseas bank account" into the spam folder.
+					</li>
+					<li>
+						<a class="cred">Unsupervised Learning</a> - Marketing firms "kindly" use hundreds of behavior and demographic indicators to segment customers into targeted offer groups. (find hidden patterns or grouping in data without labeled responses)
+					</li>
+					<li>
+						<a class="cred">Reinforcement Learning</a> - A computer and camera within a self-driving car interact with the road and other cars to learn how to navigate a city.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Why Machine learning ?</h2>
+				<ul class="left-align" style="font-size:33px;">
+					<li>
+						<a class="cred">Massive Global Demand</a> - Data scientists, software engineers, and business analysts all benefit by knowing machine learning
+					</li>
+					<li>
+						<a class="cred">Data is Power</a> - Data is transforming everything we do. All organizations, from startups to tech giants to Fortune 500 corporations, are racing to harness their data
+					</li>
+					<li>
+						<a class="cred">Easy Decision Making</a> - Large organizations can take fast decision based on Analysis tools powered by ML.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Prerequisites</h2>
+				<ul class="left-align" style="font-size:33px;">
+					<li>
+						<a class="cred">Python for Data Science</a> - You can’t use machine learning unless you know how to program.
+					</li>
+					<li>
+						<a class="cred">Statistics for Data Science</a> - Understanding statistics, especially Bayesian probability, is essential for many machine learning algorithms.
+					</li>
+					<li>
+						<a class="cred">Math for Data Science</a> - Original algorithm research requires a foundation in linear algebra and multivariable calculus.
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Requirements</h2>
+				<ul class="left-align" style="font-size:33px;">
+					<li>
+						<a class="cred">Python 2.7</a>
+					</li>
+					<li>
+						<a class="cred">NumPy</a> - for more efficient numerical computation
+					</li>
+					<!-- <li>
+						<a class="cred">Pandas</a> - convenient library that supports dataframes (Optional)
+					</li> -->
+					<li>
+						<a class="cred">Scikit-Learn / sklearn</a> - Tool for data mining
+					</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>NumPy</h2>
+				<ul class="left-align">
+					<li>Mathematical and logical operations on arrays.</li>
+					<li>Fourier transforms and routines for shape manipulation</li>
+					<li>Operations related to linear algebra. NumPy has in-built functions for linear algebra and random number generation.</li>
+				</ul><br><br>
+				<a href="http://numpy.org" target="_blank">numpy.org</a>
+			</section>
+
+			<section>
+				<h2>NumPy Installation</h2>
+				<pre><code>pip install numpy</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy Ndarray Object</h2>
+				<ul class="left-align">
+					<li>N-dimensional array type </li>
+					<li>Every item with same size of memory</li>
+					<li>Any item extracted from ndarray object (by slicing) is represented by a Python object of one of array scalar types.</li>
+				</ul>
+				<img src="images/ndarray.jpg" width="700">
+			</section>
+
+			<section>
+				<h2>NumPy Ndarray Object</h2>
+				<pre class=""><code data-trim>
+numpy.array(object, dtype = None, copy = True, 
+		   order = None, subok = False, ndmin = 0)
+				</code></pre>
+				<pre class=""><code data-trim>
+>>> import numpy as np
+>>> a = np.array([[1, 2], [3, 4]]) 
+>>> print a
+[[1 2]
+ [3 4]]
+>>> a = np.array([1, 2, 3], dtype = complex) 
+>>> print a
+[ 1.+0.j  2.+0.j  3.+0.j]
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy Data Types</h2>
+				<pre class=""><code data-trim>
+bool_, int_, intc, intp, int8, int16, int32, int64,
+uint8, uint16, uint32, uint64,
+float_, float16, float32, float64,
+complex_, complex64, complex128
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy Array Attributes</h2>
+				<pre class=""><code data-trim>
+>>> import numpy as np 
+>>> a = np.array([[1,2,3],[4,5,6]]) 
+>>> print a.shape
+(2, 3)
+>>> a.shape = (3,2)
+>>> print a 
+[[1 2]
+ [3 4]
+ [5 6]]
+>>> b = a.reshape(3,2)
+>>> print b
+[[1 2]
+ [3 4]
+ [5 6]]					
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy Array Attributes</h2>
+				<pre class=""><code data-trim>
+>>> import numpy as np
+>>> a = np.arange(24) 
+>>> print a
+[ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
+>>> a.ndim
+1
+>>> b = a.reshape(2,4,3) 
+>>> print b 
+[[[ 0  1  2]
+  [ 3  4  5]
+  [ 6  7  8]
+  [ 9 10 11]]
+ [[12 13 14]
+  [15 16 17]
+  [18 19 20]
+  [21 22 23]]]
+>>> a.itemsize
+8			
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy Array Creation Routines</h2>
+				<pre class=""><code data-trim>
+>>> # numpy.empty(shape, dtype = float, order = 'C')
+>>> import numpy as np 
+>>> x = np.empty([3, 2], dtype = int) 
+>>> print x
+[[-6917529027641081856 -6917529027641081856]
+ [     140512543637508      140512543686784]
+ [     140512543688528      140512543686784]]
+>>> 
+>>> x = np.zeros(5) 
+>>> print x
+[ 0.  0.  0.  0.  0.]
+>>> # numpy.zeros(shape, dtype = float, order = 'C')
+>>> x = np.zeros((2, 2), dtype = np.int)
+>>> print x
+[[0 0]
+ [0 0]]
+>>> # numpy.ones(shape, dtype = None, order = 'C')
+>>> x = np.ones([2, 2], dtype = int) 
+>>> print x
+[[1 1]
+ [1 1]]
+>>> 
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy - Array From Existing Data</h2>
+				<pre class=""><code data-trim>
+>>> # numpy.asarray(a, dtype = None, order = None)
+>>> import numpy as np 
+>>> x = [1,2,3] 
+>>> a = np.asarray(x) 
+>>> print a
+[1 2 3]
+>>> 
+>>> x = [(1,2,3),(4,5)] 
+>>> a = np.asarray(x) 
+>>> print a
+[(1, 2, 3) (4, 5)]
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy - Array From Numerical Ranges</h2>
+				<pre class=""><code data-trim>
+>>> # numpy.arange(start, stop, step, dtype)
+>>> import numpy as np 
+>>> x = [1,2,3] 
+>>> a = np.asarray(x) 
+>>> print a
+[1 2 3]
+>>> 
+>>> x = [(1,2,3),(4,5)] 
+>>> a = np.asarray(x) 
+>>> print a
+[(1, 2, 3) (4, 5)]
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy - Advanced Indexing</h2>
+				<pre class=""><code data-trim>
+>>> import numpy as np 
+>>> x = np.array([[1, 2], [3, 4], [5, 6]]) 
+>>> y = x[[0,1,2], [0,1,0]]
+>>> print y
+[1 4 5]
+>>> 
+>>> x = np.array([[ 0,  1,  2],[ 3,  4,  5],[ 6,  7,  8],[ 9, 10, 11]])
+>>> print x
+[[ 0  1  2]
+ [ 3  4  5]
+ [ 6  7  8]
+ [ 9 10 11]]
+>>> rows = np.array([[0,0],[3,3]])
+>>> cols = np.array([[0,2],[0,2]]) 
+>>> y = x[rows,cols]
+>>> print y
+[[ 0  2]
+ [ 9 11]]
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy - Broadcasting</h2>
+				<pre class=""><code data-trim>
+>>> import numpy as np 
+>>> a = np.array([[0.0,0.0,0.0],[10.0,10.0,10.0],[20.0,20.0,20.0],[30.0,30.0,30.0]]) 
+>>> b = np.array([1.0,2.0,3.0]) 
+>>> print a
+[[  0.   0.   0.]
+ [ 10.  10.  10.]
+ [ 20.  20.  20.]
+ [ 30.  30.  30.]]
+>>> print b
+[ 1.  2.  3.]
+>>> print a + b
+[[  1.   2.   3.]
+ [ 11.  12.  13.]
+ [ 21.  22.  23.]
+ [ 31.  32.  33.]]
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy - Broadcasting</h2>
+				<img src="images/array.jpg" width="700">
+			</section>
+
+			<section>
+				<h2>NumPy - Iterating Over Array</h2>
+				<pre class=""><code data-trim>
+>>> import numpy as np 
+>>> a = np.arange(0,60,5)
+>>> a = a.reshape(3,4)
+>>> print a
+[[ 0  5 10 15]
+ [20 25 30 35]
+ [40 45 50 55]]
+>>> for x in np.nditer(a):
+...     print x,
+... 
+0 5 10 15 20 25 30 35 40 45 50 55
+>>> 
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy - Iterating Over Array</h2>
+				<pre class=""><code data-trim>
+>>> import numpy as np
+>>> a = np.arange(0,60,5) 
+>>> a = a.reshape(3,4)
+>>> print a 
+[[ 0  5 10 15]
+ [20 25 30 35]
+ [40 45 50 55]]
+>>> b = a.T # Transpose of array
+>>> print b
+[[ 0 20 40]
+ [ 5 25 45]
+ [10 30 50]
+ [15 35 55]]
+>>> for x in np.nditer(b):
+...     print x,
+... 
+0 5 10 15 20 25 30 35 40 45 50 55
+>>> 
+
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>NumPy - Modifying Array Values</h2>
+				<pre class=""><code data-trim>
+>>> import numpy as np
+>>> a = np.arange(0,60,5)
+>>> a = a.reshape(3,4)
+>>> print a
+[[ 0  5 10 15]
+ [20 25 30 35]
+ [40 45 50 55]]
+>>> for x in np.nditer(a, op_flags=['readwrite']):
+...     x[...]=2*x
+... 
+>>> print a
+[[  0  10  20  30]
+ [ 40  50  60  70]
+ [ 80  90 100 110]]
+>>> 
+				</code></pre>
+			</section>
+
+			<section>
+				<h2>More NUMPY</h2>
+				<ul class="left-align">
+					<li><a href="https://www.tutorialspoint.com/numpy/numpy_array_manipulation.htm" target="_blank">Array Manipulation</a></li>
+					<li><a href="https://www.tutorialspoint.com/numpy/numpy_binary_operators.htm" target="_blank">Binary Operators</a></li>
+					<li><a href="https://www.tutorialspoint.com/numpy/numpy_mathematical_functions.htm" target="_blank">Mathematical Functions</a></li>
+					<li><a href="https://www.tutorialspoint.com/numpy/numpy_arithmetic_operations.htm" target="_blank">Arithmetic Operations</a></li>
+					<li><a href="https://www.tutorialspoint.com/numpy/numpy_statistical_functions.htm" target="_blank">Statistical Functions</a></li>
+					<li><a href="https://www.tutorialspoint.com/numpy/numpy_matplotlib.htm" target="_blank">Matplotlib</a></li>
+				</ul><br><br>
+				
+			</section>
+
 			<section>
 				<h2>Scikit Learn</h2>
 				<ul class="left-align">
@@ -200,15 +559,15 @@ plt.show()
 				<h2 class="text-normal">KNeighborsClassifier</h2>
 				<pre class=""><code data-trim>
 				sklearn.neighbors.KNeighborsClassifier(
-n_neighbors=5,
-weights=’uniform’,
-algorithm=’auto’,
-leaf_size=30,
-p=2,
-metric=’minkowski’,
-metric_params=None,
-n_jobs=1,
-**kwargs)
+	n_neighbors = 5,
+	weights = ’uniform’,
+	algorithm = ’auto’,
+	leaf_size = 30,
+	p = 2,
+	metric = ’minkowski’,
+	metric_params = None,
+	n_jobs = 1,
+	**kwargs )
 				</code></pre>
 			</section>
 
@@ -271,6 +630,7 @@ plt.show()
 				</code></pre>
 			</section>
 
+			<!--
 			<section>
 				<pre class="stretch"><code data-trim>
 Classification report for classifier SVC(C=1.0, cache_size=200,
@@ -305,14 +665,23 @@ Confusion matrix:
  [ 0  0  0  0  0  1  0 88  0  0]
  [ 0  0  0  0  0  0  0  0 88  0]
  [ 0  0  0  1  0  1  0  0  0 90]]
-					</code></pre>
-				</section>
+				</code></pre>
+			</section>
+			-->
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>Support Vector Machines (SVM)</h2>
+				<p>
+					In Machine learning, support vector machines (SVMs) are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis.
+				</p>
+			</section>
 			
 			<section>
 				<h2>References</h2>
 				<ul>
 					<li><a target="_blank" href="https://www.python.org">python.org</a></li>
 					<li><a target="_blank" href="http://scikit-learn.org">scikit-learn.org</a></li>
+					<li><a target="_blank" href="https://www.tutorialspoint.com/numpy">tutorialspoint.com</a></li>
 				</ul>
 			</section>
 
