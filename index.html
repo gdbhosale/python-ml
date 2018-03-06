@@ -465,6 +465,101 @@ complex_, complex64, complex128
 			</section>
 
 			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
+				<h2>Support Vector Machines (SVM)</h2>
+				<p>
+					In Machine learning, support vector machines (SVMs) are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis.
+				</p>
+			</section>
+
+			<section>
+				<h2>SVM Advantages</h2>
+				<ul class="left-align">
+					<li>Effective in high dimensional spaces</li>
+					<li>Uses a subset of training points in the decision function (mory efficient support vectors)</li>
+					<li>Versatile: different Kernel functions can be specified for the decision function</li>
+					<li>Common kernels are provided, but it is also possible to specify custom kernels</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>SVM Disadvantages</h2>
+				<ul class="left-align">
+					<li>If the number of features is much greater than the number of samples, avoid over-fitting in choosing Kernel functions and regularization term is crucial.</li>
+					<li>SVMs do not directly provide probability estimates, these are calculated using an expensive five-fold cross-validation.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>SVM</h2>
+				<ul class="left-align">
+					<li>Supports both dense (numpy.ndarray) & sparse (scipy.sparse) Data</li>
+					<li>SVMs do not directly provide probability estimates, these are calculated using an expensive five-fold cross-validation.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>What is Supervised Learning ?</h2>
+				<img src="images/learning-supervised2.jpg">
+			</section>
+
+			<section>
+				<h2>What is SVM ?</h2>
+				<p>
+					Visit a Node nearest to you only once. Also called greedy algorithm.
+				</p>
+				<img src="images/svm-data-points.jpg" width="400">
+				<img src="images/svm-infinte-linear-separators.jpg" width="400">
+			</section>
+
+			<section>
+				<h2>What is SVM ?</h2>
+				<!-- https://onionesquereality.wordpress.com/2009/03/22/why-are-support-vectors-machines-called-so/ -->
+				<ul class="left-align">
+					<li>we see that the <b class="cred">thinner lines</b> mark the distance from the classifier to the closest data points called the support vectors.</li>
+					<li>distance between the two thin lines is called the <b class="cred">margin</b></li>
+				</ul>
+				<img src="images/svm-optimal-margin-classifier.jpg">
+			</section>
+
+			<section>
+				<h2>What is SVM ?</h2>
+				<ul class="left-align">
+					<li>mechanical analogy emphasizes: Most important data points are the support vectors as they have the maximum values of <b class="cred">Alpha</b> <img src="images/alpha.png">. These points exert the maximum force on the decision sheet.</li>
+					<li>these specific data points are “supporting” the hyperplane into <b class="cred">equilibrium</b>.</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>SVM Example</h2>
+				<pre class=""><code data-trim>
+>>> from sklearn import svm
+>>> X = [[0, 0], [1, 1]]
+>>> y = [0, 1]
+>>> clf = svm.SVC()
+>>> clf.fit(X, y)  
+SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+    decision_function_shape='ovr', degree=3, gamma='auto', kernel='rbf',
+    max_iter=-1, probability=False, random_state=None, shrinking=True,
+	tol=0.001, verbose=False)
+>>> 
+>>> clf.predict([[2., 2.]])
+array([1])
+>>> # get support vectors
+>>> clf.support_vectors_
+array([[ 0.,  0.],
+       [ 1.,  1.]])
+>>> # get indices of support vectors
+>>> clf.support_ 
+array([0, 1]...)
+>>> # get number of support vectors for each class
+>>> clf.n_support_ 
+array([1, 1]...)
+				</code></pre>
+			</section>
+
+			<!-- http://scikit-learn.org/stable/auto_examples/index.html -->
+
+			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
 				<h2>Classification</h2>
 				<img src="images/sphx_glr_plot_classification.jpg" width="700">
 			</section>
@@ -485,12 +580,22 @@ complex_, complex64, complex128
 			</section>
 
 			<section>
-					<h2>K Nearest Neighbors (kNN)</h2>
-					<p>
-						Visit a Node nearest to you only once. Also called greedy algorithm.
-					</p>
-					<img src="images/k_nearest_neighbour_algo.jpg" width="700">
-				</section>
+				<h2>Nearest Neighbors</h2>
+				<img src="images/Nearest-Neighbor.gif" width="700">
+			</section>
+
+			<section>
+				<h2>K Nearest Neighbors (kNN)</h2>
+				<p>
+					Visit a Node nearest to you only once. Also called greedy algorithm.
+				</p>
+				<img src="images/k_nearest_neighbour_algo.jpg" width="700">
+			</section>
+
+			<section>
+				<h2>Nearest Neighbors</h2>
+				<img src="images/Nearest-neighbor_chain_algorithm_animated.gif" width="400">
+			</section>
 
 			<section>
 				<h2 class="text-normal">k Nearest Neighbors Classification</h2>
@@ -572,6 +677,197 @@ plt.show()
 			</section>
 
 			<section>
+				<h2 class="text-normal">SVM kernels</h2>
+				<p>linear, rbf, poly</p>
+				<img src="images/sphx_glr_plot_iris_exercise_000.png" width="300">
+				<img src="images/sphx_glr_plot_iris_exercise_001.png" width="300">
+				<img src="images/sphx_glr_plot_iris_exercise_002.png" width="300">
+			</section>
+
+			<section>
+				<pre class="stretch"><code data-trim>
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn import datasets, svm
+
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+
+X = X[y != 0, :2]
+y = y[y != 0]
+
+n_sample = len(X)
+
+np.random.seed(0)
+order = np.random.permutation(n_sample)
+X = X[order]
+y = y[order].astype(np.float)
+
+X_train = X[:int(.9 * n_sample)]
+y_train = y[:int(.9 * n_sample)]
+X_test = X[int(.9 * n_sample):]
+y_test = y[int(.9 * n_sample):]
+
+# fit the model
+for fig_num, kernel in enumerate(('linear', 'rbf', 'poly')):
+    clf = svm.SVC(kernel=kernel, gamma=10)
+    clf.fit(X_train, y_train)
+
+    plt.figure(fig_num)
+    plt.clf()
+    plt.scatter(X[:, 0], X[:, 1], c=y, zorder=10, cmap=plt.cm.Paired,
+                edgecolor='k', s=20)
+
+    # Circle out the test data
+    plt.scatter(X_test[:, 0], X_test[:, 1], s=80, facecolors='none',
+                zorder=10, edgecolor='k')
+
+    plt.axis('tight')
+    x_min = X[:, 0].min()
+    x_max = X[:, 0].max()
+    y_min = X[:, 1].min()
+    y_max = X[:, 1].max()
+
+    XX, YY = np.mgrid[x_min:x_max:200j, y_min:y_max:200j]
+    Z = clf.decision_function(np.c_[XX.ravel(), YY.ravel()])
+
+    # Put the result into a color plot
+    Z = Z.reshape(XX.shape)
+    plt.pcolormesh(XX, YY, Z > 0, cmap=plt.cm.Paired)
+    plt.contour(XX, YY, Z, colors=['k', 'k', 'k'],
+                linestyles=['--', '-', '--'], levels=[-.5, 0, .5])
+
+    plt.title(kernel)
+plt.show()
+				</code></pre>
+			</section>
+
+			<section>
+				<h2 class="text-normal">Classifier comparison</h2>
+				<img src="images/sphx_glr_plot_classifier_comparison_001.png" width="900">
+			</section>
+
+			<section>
+				<pre class="stretch"><code data-trim>
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_moons, make_circles, make_classification
+from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
+
+h = .02  # step size in the mesh
+
+names = ["Nearest Neighbors", "Linear SVM", "RBF SVM", "Gaussian Process",
+         "Decision Tree", "Random Forest", "Neural Net", "AdaBoost",
+         "Naive Bayes", "QDA"]
+
+classifiers = [
+    KNeighborsClassifier(3),
+    SVC(kernel="linear", C=0.025),
+    SVC(gamma=2, C=1),
+    GaussianProcessClassifier(1.0 * RBF(1.0)),
+    DecisionTreeClassifier(max_depth=5),
+    RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
+    MLPClassifier(alpha=1),
+    AdaBoostClassifier(),
+    GaussianNB(),
+    QuadraticDiscriminantAnalysis()]
+
+X, y = make_classification(n_features=2, n_redundant=0, n_informative=2,
+                           random_state=1, n_clusters_per_class=1)
+rng = np.random.RandomState(2)
+X += 2 * rng.uniform(size=X.shape)
+linearly_separable = (X, y)
+
+datasets = [make_moons(noise=0.3, random_state=0),
+            make_circles(noise=0.2, factor=0.5, random_state=1),
+            linearly_separable
+            ]
+
+figure = plt.figure(figsize=(27, 9))
+i = 1
+# iterate over datasets
+for ds_cnt, ds in enumerate(datasets):
+    # preprocess dataset, split into training and test part
+    X, y = ds
+    X = StandardScaler().fit_transform(X)
+    X_train, X_test, y_train, y_test = \
+        train_test_split(X, y, test_size=.4, random_state=42)
+
+    x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+    y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                         np.arange(y_min, y_max, h))
+
+    # just plot the dataset first
+    cm = plt.cm.RdBu
+    cm_bright = ListedColormap(['#FF0000', '#0000FF'])
+    ax = plt.subplot(len(datasets), len(classifiers) + 1, i)
+    if ds_cnt == 0:
+        ax.set_title("Input data")
+    # Plot the training points
+    ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright,
+               edgecolors='k')
+    # and testing points
+    ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cm_bright, alpha=0.6,
+               edgecolors='k')
+    ax.set_xlim(xx.min(), xx.max())
+    ax.set_ylim(yy.min(), yy.max())
+    ax.set_xticks(())
+    ax.set_yticks(())
+    i += 1
+
+    # iterate over classifiers
+    for name, clf in zip(names, classifiers):
+        ax = plt.subplot(len(datasets), len(classifiers) + 1, i)
+        clf.fit(X_train, y_train)
+        score = clf.score(X_test, y_test)
+
+        # Plot the decision boundary. For that, we will assign a color to each
+        # point in the mesh [x_min, x_max]x[y_min, y_max].
+        if hasattr(clf, "decision_function"):
+            Z = clf.decision_function(np.c_[xx.ravel(), yy.ravel()])
+        else:
+            Z = clf.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+
+        # Put the result into a color plot
+        Z = Z.reshape(xx.shape)
+        ax.contourf(xx, yy, Z, cmap=cm, alpha=.8)
+
+        # Plot also the training points
+        ax.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap=cm_bright,
+                   edgecolors='k')
+        # and testing points
+        ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cm_bright,
+                   edgecolors='k', alpha=0.6)
+
+        ax.set_xlim(xx.min(), xx.max())
+        ax.set_ylim(yy.min(), yy.max())
+        ax.set_xticks(())
+        ax.set_yticks(())
+        if ds_cnt == 0:
+            ax.set_title(name)
+        ax.text(xx.max() - .3, yy.min() + .3, ('%.2f' % score).lstrip('0'),
+                size=15, horizontalalignment='right')
+        i += 1
+
+plt.tight_layout()
+plt.show()
+				</code></pre>
+			</section>
+
+			<section>
 				<h2 class="text-normal">Recognizing hand-written Digits</h2>
 				<img src="images/sphx_glr_plot_digits_classification_001.png" width="700">
 			</section>
@@ -630,6 +926,148 @@ plt.show()
 				</code></pre>
 			</section>
 
+			<section>
+				<h2 class="text-normal">Faces recognition using eigenfaces and SVMs</h2>
+				<img src="images/sphx_glr_plot_face_recognition_001.png" width="500">
+			</section>
+
+			<section>
+				<pre class="stretch"><code data-trim>
+from __future__ import print_function
+
+from time import time
+import logging
+import matplotlib.pyplot as plt
+
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV
+from sklearn.datasets import fetch_lfw_people
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+
+
+
+# Display progress logs on stdout
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
+
+
+# #############################################################################
+# Download the data, if not already on disk and load it as numpy arrays
+
+lfw_people = fetch_lfw_people(min_faces_per_person=70, resize=0.4)
+
+# introspect the images arrays to find the shapes (for plotting)
+n_samples, h, w = lfw_people.images.shape
+
+# for machine learning we use the 2 data directly (as relative pixel
+# positions info is ignored by this model)
+X = lfw_people.data
+n_features = X.shape[1]
+
+# the label to predict is the id of the person
+y = lfw_people.target
+target_names = lfw_people.target_names
+n_classes = target_names.shape[0]
+
+print("Total dataset size:")
+print("n_samples: %d" % n_samples)
+print("n_features: %d" % n_features)
+print("n_classes: %d" % n_classes)
+
+
+# #############################################################################
+# Split into a training set and a test set using a stratified k fold
+
+# split into a training and testing set
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42)
+
+
+# #############################################################################
+# Compute a PCA (eigenfaces) on the face dataset (treated as unlabeled
+# dataset): unsupervised feature extraction / dimensionality reduction
+n_components = 150
+
+print("Extracting the top %d eigenfaces from %d faces"
+      % (n_components, X_train.shape[0]))
+t0 = time()
+pca = PCA(n_components=n_components, svd_solver='randomized',
+          whiten=True).fit(X_train)
+print("done in %0.3fs" % (time() - t0))
+
+eigenfaces = pca.components_.reshape((n_components, h, w))
+
+print("Projecting the input data on the eigenfaces orthonormal basis")
+t0 = time()
+X_train_pca = pca.transform(X_train)
+X_test_pca = pca.transform(X_test)
+print("done in %0.3fs" % (time() - t0))
+
+
+# #############################################################################
+# Train a SVM classification model
+
+print("Fitting the classifier to the training set")
+t0 = time()
+param_grid = {'C': [1e3, 5e3, 1e4, 5e4, 1e5],
+              'gamma': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1], }
+clf = GridSearchCV(SVC(kernel='rbf', class_weight='balanced'), param_grid)
+clf = clf.fit(X_train_pca, y_train)
+print("done in %0.3fs" % (time() - t0))
+print("Best estimator found by grid search:")
+print(clf.best_estimator_)
+
+
+# #############################################################################
+# Quantitative evaluation of the model quality on the test set
+
+print("Predicting people's names on the test set")
+t0 = time()
+y_pred = clf.predict(X_test_pca)
+print("done in %0.3fs" % (time() - t0))
+
+print(classification_report(y_test, y_pred, target_names=target_names))
+print(confusion_matrix(y_test, y_pred, labels=range(n_classes)))
+
+
+# #############################################################################
+# Qualitative evaluation of the predictions using matplotlib
+
+def plot_gallery(images, titles, h, w, n_row=3, n_col=4):
+    """Helper function to plot a gallery of portraits"""
+    plt.figure(figsize=(1.8 * n_col, 2.4 * n_row))
+    plt.subplots_adjust(bottom=0, left=.01, right=.99, top=.90, hspace=.35)
+    for i in range(n_row * n_col):
+        plt.subplot(n_row, n_col, i + 1)
+        plt.imshow(images[i].reshape((h, w)), cmap=plt.cm.gray)
+        plt.title(titles[i], size=12)
+        plt.xticks(())
+        plt.yticks(())
+
+
+# plot the result of the prediction on a portion of the test set
+
+def title(y_pred, y_test, target_names, i):
+    pred_name = target_names[y_pred[i]].rsplit(' ', 1)[-1]
+    true_name = target_names[y_test[i]].rsplit(' ', 1)[-1]
+    return 'predicted: %s\ntrue:      %s' % (pred_name, true_name)
+
+prediction_titles = [title(y_pred, y_test, target_names, i)
+                     for i in range(y_pred.shape[0])]
+
+plot_gallery(X_test, prediction_titles, h, w)
+
+# plot the gallery of the most significative eigenfaces
+
+eigenface_titles = ["eigenface %d" % i for i in range(eigenfaces.shape[0])]
+plot_gallery(eigenfaces, eigenface_titles, h, w)
+
+plt.show()
+				</code></pre>
+			</section>
+
 			<!--
 			<section>
 				<pre class="stretch"><code data-trim>
@@ -669,13 +1107,6 @@ Confusion matrix:
 			</section>
 			-->
 
-			<section data-background="#F56767" data-background-transition="zoom" data-transition="zoom">
-				<h2>Support Vector Machines (SVM)</h2>
-				<p>
-					In Machine learning, support vector machines (SVMs) are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis.
-				</p>
-			</section>
-			
 			<section>
 				<h2>References</h2>
 				<ul>
